@@ -7,7 +7,11 @@
     "diceroll": "./bin/diceroll"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive --watch -R spec --colors"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0"
   },
   "keywords": [],
   "author": "",
