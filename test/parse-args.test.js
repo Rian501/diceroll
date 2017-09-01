@@ -1,6 +1,6 @@
 'use strict;'
 
-const { assert: { property, equal, deepEqual, notEqual, isFunction, isObject, hasAllKeys, isNumber } } = require('chai');
+const { assert: { property, equal, deepEqual, notEqual, isFunction, isObject, hasAllKeys, isFinite } } = require('chai');
 
 
 describe('parse-args', () => {
@@ -17,14 +17,20 @@ describe('parse-args', () => {
   
     it("should contain two properties, count and sides", () => {
         hasAllKeys(parseArgsFunc(['array', 'of', 'args']), ["count", "sides"]);
+        hasAllKeys(parseArgsFunc(['array', 'of', '3','4']), ["count", "sides"]);
         });
 
     it("should contain a number as the value of count", () => {
-        isNumber(parseArgsFunc(['array', 'of', 'args']).count);
+        isFinite(parseArgsFunc(['array', 'of', 'args']).count);
+        isFinite(parseArgsFunc(['array', 'of', 'args', 'other stuff', 'whatevs']).count);
+        isFinite(parseArgsFunc(['array', 'of', '3','4', '7']).count);
+        isFinite(parseArgsFunc(['array', 'of', '3','4']).count);
+        isFinite(parseArgsFunc(['array', 'of', '3']).count);
     });
 
     it("should contain a number as the value of sides", () => {
-        isNumber(parseArgsFunc(['array', 'of', 'args']).count);
+        isFinite(parseArgsFunc(['array', 'of', 'args']).sides);
+        isFinite(parseArgsFunc(['array', 'of', '3','4']).sides);
     });
 
 });
